@@ -5,8 +5,8 @@ Frontend service that renders an HTML page to vote on cats vs. dogs.
 The "vote" service forwards requests to the ["api"](https://github.com/copilot-example-voting-app/api) microservice to store
 and retrieve results on whether a voter prefers cats or dogs.
 
-The two services communicate through Service Discovery which AWS Copilot sets up by default by querying the `api.voting-app.local:8080` endpoint.  
-Alternatively, you can use the [`COPILOT_SERVICE_DISCOVERY_ENDPOINT` environment variable](https://github.com/copilot-example-voting-app/vote/blob/6b4a2dab38229b89e84d1aca6081a0577e9be167/server/server.go#L122) 
+The two services communicate through Service Discovery which AWS Copilot sets up by default by querying the `api.voting-app.local:8080` endpoint.
+Alternatively, you can use the [`SERVICE_DISCOVERY_ENDPOINT` environment variable](https://github.com/copilot-example-voting-app/vote/blob/6b4a2dab38229b89e84d1aca6081a0577e9be167/server/server.go#L122)
 that Copilot injects by default to your service.
 
 ## How to create this service?
@@ -39,7 +39,7 @@ For example, you can setup configuration for your ECS task size, exposed port, e
 secrets from AWS Secrets Manager or AWS Systems Manager Parameter Store.
 
 ## Deleting the service
-If you'd like to delete only the service from the "voting-app" application. 
+If you'd like to delete only the service from the "voting-app" application.
 ```bash
 $ copilot svc delete
 ```

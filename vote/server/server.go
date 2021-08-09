@@ -88,7 +88,7 @@ func getVoterID(r *http.Request) (string, error) {
 // getVote queries the API microservice to retrieve the vote.
 // If the vote doesn't exist, then returns an empty string "".
 func getVote(voterID string) (string, error) {
-	endpoint := fmt.Sprintf("http://api.%s:8080/votes/%s", os.Getenv("COPILOT_SERVICE_DISCOVERY_ENDPOINT"), voterID)
+	endpoint := fmt.Sprintf("http://api.%s:8080/votes/%s", os.Getenv("SERVICE_DISCOVERY_ENDPOINT"), voterID)
 	resp, err := http.Get(endpoint)
 	if err != nil {
 		log.Printf("WARN: server: coudln't get vote for voter id %s: %v\n", voterID, err)
@@ -126,7 +126,7 @@ func saveVote(voterID, vote string) error {
 		return fmt.Errorf("server: encode save vote data: %v", err)
 	}
 
-	endpoint := fmt.Sprintf("http://api.%s:8080/votes", os.Getenv("COPILOT_SERVICE_DISCOVERY_ENDPOINT"))
+	endpoint := fmt.Sprintf("http://api.%s:8080/votes", os.Getenv("SERVICE_DISCOVERY_ENDPOINT"))
 	_, err = http.Post(endpoint, "application/json", bytes.NewBuffer(dat))
 	if err != nil {
 		log.Printf("ERROR: server: save vote %s for voter id %s: %v\n", vote, voterID, err)
