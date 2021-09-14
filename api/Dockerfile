@@ -10,6 +10,8 @@ WORKDIR /svc
 # Build the binary
 ENV GOPROXY=direct
 RUN go build -o api ./cmd/api
+RUN echo "${DB_SSL_MODE}"
+RUN env | sort
 
 # Target used by our compose file, we have to port wait-for-postgres.sh so that the containers come up in the proper order.
 FROM builder as local
