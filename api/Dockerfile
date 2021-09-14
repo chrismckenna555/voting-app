@@ -1,5 +1,7 @@
 FROM golang:1.15.2 as builder
 
+ARG DB_SSL_MODE
+
 # Copy all the source files for the api service.
 RUN mkdir /svc
 ADD . /svc
