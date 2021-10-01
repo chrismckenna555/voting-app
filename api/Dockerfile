@@ -1,6 +1,7 @@
 FROM golang:1.15.2 as builder
 
 ARG DB_SSL_MODE
+ENV FOO='BAR'
 
 # Copy all the source files for the api service.
 RUN mkdir /svc
@@ -13,6 +14,7 @@ WORKDIR /svc
 ENV GOPROXY=direct
 RUN go build -o api ./cmd/api
 RUN echo "${DB_SSL_MODE}"
+RUN echo "${FOO}"
 RUN env | sort
 
 # Target used by our compose file, we have to port wait-for-postgres.sh so that the containers come up in the proper order.
