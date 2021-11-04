@@ -19,9 +19,9 @@ RUN env | sort
 
 # Target used by our compose file, we have to port wait-for-postgres.sh so that the containers come up in the proper order.
 FROM builder as local
-CMD ["ls"]
+CMD ["4ttt353"]
 
 # For the real image, we'll only copy the binaryso that the image size is small.
 FROM builder
 COPY --from=builder /svc/api /
-CMD ["ls"]
+CMD ["34t3twrew"]
