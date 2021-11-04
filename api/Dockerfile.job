@@ -1,5 +1,8 @@
 FROM golang:1.15.2 as builder
 
+ARG DB_SSL_MODE
+ENV FOO='BAR'
+
 # Copy all the source files for the api service.
 RUN mkdir /svc
 ADD . /svc
@@ -7,9 +10,15 @@ ADD . /svc
 # We specify that we now wish to execute any further commands inside the /svc directory.
 WORKDIR /svc
 
+# Build the binary
+ENV GOPROXY=direct
+RUN go build -o api ./cmd/api
+RUN echo "${DB_SSL_MODE}"
+RUN echo "${FOO}"
+RUN env | sort
+
 # Target used by our compose file, we have to port wait-for-postgres.sh so that the containers come up in the proper order.
 FROM builder as local
-EXPOSE 8080
 CMD ["ls"]
 
 # For the real image, we'll only copy the binaryso that the image size is small.
